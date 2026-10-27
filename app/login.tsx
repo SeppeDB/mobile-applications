@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { Pressable, Text as RNText, StyleSheet, View } from 'react-native';
 import { Redirect, router } from 'expo-router';
 import { useAuthStore } from '../src/state/useAuthStore';
+import { Card } from '../src/components/primitives/Card';
 import { InputField } from '../src/components/primitives/InputField';
 import { StyledButton } from '../src/components/StyledButton';
 import { Stack } from '../src/components/primitives/Stack';
 import { Text } from '../src/components/primitives/Text';
+import { colors, spacing } from '../src/theme';
 
 type Mode = 'login' | 'signup';
 
@@ -49,45 +51,67 @@ export default function LoginScreen() {
 
   return (
     <View style={styles.container}>
-      <Stack gap="lg" padding="lg">
-        <Text size="xl" weight="bold" align="center">
-          {mode === 'login' ? 'Welcome back' : 'Create an account'}
-        </Text>
-        {mode === 'signup' && (
-          <InputField label="Name" value={name} onChangeText={setName} testID="name-input" />
-        )}
-        <InputField
-          label="Email"
-          value={email}
-          onChangeText={setEmail}
-          placeholder="you@example.com"
-          testID="email-input"
-        />
-        <InputField
-          label="Password"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry
-          testID="password-input"
-          error={error !== '' ? error : undefined}
-        />
-        {info !== '' && <Text align="center">{info}</Text>}
-        <StyledButton
-          label={mode === 'login' ? 'Log in' : 'Sign up'}
-          onPress={handleSubmit}
-          isLoading={isLoading}
-          testID="login-button"
-        />
+      <View style={styles.content}>
+        <Stack gap="sm" align="center">
+          <RNText style={styles.logo}>🍿</RNText>
+          <Text size="xl" weight="bold" align="center">Movie Night</Text>
+          <Text align="center" color={colors.textMuted}>Pick tonight's movie together</Text>
+        </Stack>
+
+        <Card>
+          <Stack gap="md" padding="lg">
+            <Text size="lg" weight="bold">
+              {mode === 'login' ? 'Welcome back' : 'Join the movie night'}
+            </Text>
+            {mode === 'signup' && (
+              <InputField label="Name" value={name} onChangeText={setName} testID="name-input" />
+            )}
+            <InputField
+              label="Email"
+              value={email}
+              onChangeText={setEmail}
+              placeholder="you@example.com"
+              testID="email-input"
+            />
+            <InputField
+              label="Password"
+              value={password}
+              onChangeText={setPassword}
+              secureTextEntry
+              testID="password-input"
+              error={error !== '' ? error : undefined}
+            />
+            {info !== '' && <Text color={colors.success}>{info}</Text>}
+            <StyledButton
+              label={mode === 'login' ? 'Log in' : 'Sign up'}
+              onPress={handleSubmit}
+              isLoading={isLoading}
+              testID="login-button"
+            />
+          </Stack>
+        </Card>
+
         <Pressable onPress={toggleMode} testID="toggle-mode">
-          <Text align="center" size="sm">
-            {mode === 'login' ? "No account yet? Sign up" : 'Already have an account? Log in'}
+          <Text align="center" color={colors.textMuted}>
+            {mode === 'login' ? 'No account yet? ' : 'Already have an account? '}
+            <Text weight="medium" color={colors.primary}>
+              {mode === 'login' ? 'Sign up' : 'Log in'}
+            </Text>
           </Text>
         </Pressable>
-      </Stack>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: spacing.md,
+    backgroundColor: colors.background,
+  },
+  content: { width: '100%', maxWidth: 400, gap: spacing.lg },
+  logo: { fontSize: 56, lineHeight: 64, textAlign: 'center' },
 });

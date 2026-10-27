@@ -1,4 +1,5 @@
 import { View, Pressable, StyleSheet } from 'react-native';
+import { colors, radius } from '../../theme';
 
 interface CardProps {
   children: React.ReactNode;
@@ -18,5 +19,10 @@ export function Card({ children, onPress }: CardProps) {
 }
 
 const styles = StyleSheet.create({
-  base: {},
+  base: {
+    backgroundColor: colors.surface,
+    borderRadius: radius.lg,
+    borderWidth: 1,
+    borderColor: colors.border,
+  },
 });
