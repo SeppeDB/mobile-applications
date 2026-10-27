@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "UCLL Mobile Starter",
+    "name": "Movie Night",
     "slug": "ucll-mobile-starter",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -12,14 +12,14 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./public/icons/icon.png",
+        "foregroundImage": "./public/icons/icon-512.png",
         "backgroundColor": "#ffffff"
       }
     },
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./public/icons/icon.png"
+      "favicon": "./public/icons/icon-512.png"
     },
     "plugins": ["expo-router"],
     "experiments": {
