@@ -31,6 +31,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
+    "@emnapi/core": "^1.11.3",
+    "@emnapi/runtime": "^1.11.3",
     "@storybook/react": "^10.5.10",
     "@storybook/react-vite": "^10.5.10",
     "@types/react": "~19.2.4",
